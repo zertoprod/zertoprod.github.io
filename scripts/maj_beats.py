@@ -94,7 +94,7 @@ def main():
     liste.sort(key=lambda b: b["date"], reverse=True)
     texte = json.dumps(liste, ensure_ascii=False, indent=1) + "\n"
     if not FICHIER.exists() or FICHIER.read_text(encoding="utf-8") != texte:
-        FICHIER.write_text(texte, encoding="utf-8")
+        FICHIER.write_text(texte, encoding="utf-8", newline="\n")
     print(f"{len(liste)} beats, {nouveaux} nouveau(x)")
 
 
