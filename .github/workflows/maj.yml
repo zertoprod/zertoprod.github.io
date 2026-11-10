@@ -1,0 +1,59 @@
+# Toutes les heures : regarde la chaine YouTube, ajoute les nouvelles instrus, met le site en ligne.
+name: Mise a jour des instrus
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  maj:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Lire la chaine YouTube
+        run: python scripts/maj_beats.py
+
+      - name: Garder le robot actif (GitHub le coupe apres 60 jours sans activite)
+        run: |
+          derniere=$(git log -1 --format=%ct)
+          if [ $(( $(date +%s) - derniere )) -gt 2592000 ]; then date -u > data/derniere-verif.txt; fi
+
+      - name: Enregistrer les changements
+        id: changements
+        run: |
+          git config user.name "robot-zerto"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then echo "nouveau=non" >> $GITHUB_OUTPUT
+          else git commit -m "Nouvelles instrus" && git push && echo "nouveau=oui" >> $GITHUB_OUTPUT; fi
+
+      # On republie le site seulement s'il y a du nouveau (ou apres une modif du site)
+      - if: steps.changements.outputs.nouveau == 'oui' || github.event_name != 'schedule'
+        uses: actions/configure-pages@v5
+      - if: steps.changements.outputs.nouveau == 'oui' || github.event_name != 'schedule'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - if: steps.changements.outputs.nouveau == 'oui' || github.event_name != 'schedule'
+        id: deploiement
+        uses: actions/deploy-pages@v4

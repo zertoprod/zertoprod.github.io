@@ -1,0 +1,60 @@
+[
+ {
+  "id": "XwFziLFOpUo",
+  "titre": "[FREE] Sdm x Leto type beat - Fuel",
+  "date": "2026-10-28",
+  "nom": "Fuel",
+  "artistes": [
+   "Sdm",
+   "Leto"
+  ],
+  "ambiance": "",
+  "free": true
+ },
+ {
+  "id": "4heygoV7r24",
+  "titre": "Sch Type Beat - \"Offshore\" | Zerto",
+  "date": "2026-10-25",
+  "nom": "Offshore",
+  "artistes": [
+   "Sch"
+  ],
+  "ambiance": "",
+  "free": false
+ },
+ {
+  "id": "DVvUtYQR1WI",
+  "titre": "NIAKS X ZKR - TYPE BEAT \"KILO\" | INSTRU RAP/OLD SCHOOL (PROD.ZERTO)",
+  "date": "2026-05-28",
+  "nom": "KILO",
+  "artistes": [
+   "NIAKS",
+   "ZKR"
+  ],
+  "ambiance": "Old school",
+  "free": false
+ },
+ {
+  "id": "HSCMHfDf36w",
+  "titre": "WERENOI - TYPE BEAT \"PLAQUE\" | INSTRU RAP (PROD.ZERTO)",
+  "date": "2026-05-26",
+  "nom": "PLAQUE",
+  "artistes": [
+   "WERENOI"
+  ],
+  "ambiance": "",
+  "free": false
+ },
+ {
+  "id": "SSXotXQQei4",
+  "titre": "SDM X NINHO - TYPE BEAT \"SANG\" | INSTRU RAP (PROD.ZERTO)",
+  "date": "2026-05-24",
+  "nom": "SANG",
+  "artistes": [
+   "SDM",
+   "NINHO"
+  ],
+  "ambiance": "",
+  "free": false
+ }
+]

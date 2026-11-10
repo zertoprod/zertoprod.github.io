@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zerto - Instrus rap FR</title>
+<meta name="description" content="Toutes les instrus de Zerto : type beats rap FR à écouter, licences et contact.">
+<meta property="og:title" content="Zerto - Instrus rap FR">
+<meta property="og:description" content="Toutes les instrus de Zerto : type beats rap FR à écouter, licences et contact.">
+<meta property="og:image" content="logo.png">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="grain"></div>
+
+<div class="ecran">
+  <aside class="gauche" id="lecteur">
+    <header class="top">
+      <a href="#" class="brand"><img src="logo.png" alt="Zerto"></a>
+      <nav>
+        <a href="#licences">Licences</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <div class="scene">
+      <p class="etiquette" id="p-etiquette">Dernière sortie</p>
+      <h1 id="p-nom">...</h1>
+      <p class="artistes" id="p-artistes"></p>
+      <div class="video"><iframe id="player" title="Lecteur YouTube" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="sous-video">
+        <p class="meta" id="p-meta"></p>
+        <div class="actions">
+          <a class="btn btn-plein" href="#licences" id="p-acheter">Licence</a>
+          <a class="btn" id="p-youtube" target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="droite">
+    <section class="catalogue" id="instrus">
+      <div class="catalogue-tete">
+        <h2>Tracklist <span id="compteur"></span></h2>
+        <input type="search" id="recherche" placeholder="Artiste, instru..." aria-label="Rechercher">
+      </div>
+      <div class="liste" id="grille"></div>
+      <p class="vide" id="vide" hidden>Aucune instru trouvée.</p>
+      <div class="plus"><button class="btn" id="voir-plus" hidden>Voir plus</button></div>
+    </section>
+
+    <section class="bloc" id="licences">
+      <h2>Licences</h2>
+      <p>Bientôt disponibles ici. Une instru te plaît ? Écris-moi, on s'arrange.</p>
+      <div class="actions"><a class="btn btn-plein" id="l-mail">M'écrire</a></div>
+    </section>
+
+    <section class="bloc" id="contact">
+      <h2>Contact</h2>
+      <p>Collab, exclu, question : je réponds vite.</p>
+      <div class="actions">
+        <a class="btn btn-plein" href="https://www.instagram.com/_zerto_/" target="_blank" rel="noopener">Instagram @_zerto_</a>
+        <a class="btn" id="c-mail">Mail</a>
+      </div>
+    </section>
+
+    <footer>Prod. Zerto · Les nouvelles instrus arrivent ici automatiquement.</footer>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
