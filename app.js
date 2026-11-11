@@ -1,6 +1,13 @@
 // Réglages
 const EMAIL = "zertoproduction@gmail.com";
 const PAR_PAGE = 24;
+const PAYPAL = "zertoproduction@gmail.com";   // adresse du compte PayPal Pro
+const LICENCES = [
+  { nom: "MP3", prix: 25, points: ["Fichier MP3 sans tag", "10 000 streams", "1 son, crédit (prod. Zerto)"] },
+  { nom: "WAV", prix: 45, points: ["Fichiers WAV + MP3", "100 000 streams", "Clip YouTube monétisable"], top: true },
+  { nom: "Pistes", prix: 90, points: ["WAV + pistes séparées", "500 000 streams", "Clip YouTube monétisable"] },
+  { nom: "Exclusive", prix: null, points: ["Tous les fichiers", "Streams illimités", "Instru retirée de la vente"] },
+];
 
 let beats = [];
 let filtres = [];
@@ -27,8 +34,48 @@ function choisir(b, lancer) {
   $("p-artistes").textContent = artistesTexte(b);
   $("p-meta").textContent = [b.ambiance, dateFr(b.date)].filter(Boolean).join(" · ");
   $("p-youtube").href = `https://www.youtube.com/watch?v=${b.id}`;
-  $("l-mail").href = mailto(`Licence - ${b.nom}`);
+  afficherLicences(b);
   document.querySelectorAll(".beat").forEach((el) => el.classList.toggle("actif", el.dataset.id === b.id));
+}
+
+function lienPaypal(licence, b) {
+  const p = new URLSearchParams({
+    cmd: "_xclick",
+    business: PAYPAL,
+    item_name: `Licence ${licence.nom} - ${b.nom.toUpperCase()} (prod. Zerto)`,
+    item_number: b.id,
+    amount: licence.prix.toFixed(2),
+    currency_code: "EUR",
+    no_shipping: "1",
+    lc: "FR",
+    return: location.origin + location.pathname + "#merci",
+    cancel_return: location.origin + location.pathname + "#licences",
+  });
+  return `https://www.paypal.com/cgi-bin/webscr?${p}`;
+}
+
+function afficherLicences(b) {
+  $("l-beat").textContent = b.nom.toUpperCase();
+  $("offres").replaceChildren(...LICENCES.map((l) => {
+    const el = document.createElement("div");
+    el.className = "offre" + (l.top ? " top" : "");
+    el.innerHTML = `<p class="offre-nom"></p><p class="offre-prix"></p><ul></ul><a class="btn"></a>`;
+    el.querySelector(".offre-nom").textContent = l.nom;
+    el.querySelector(".offre-prix").textContent = l.prix ? `${l.prix} €` : "Sur devis";
+    el.querySelector("ul").replaceChildren(...l.points.map((t) => { const li = document.createElement("li"); li.textContent = t; return li; }));
+    const a = el.querySelector("a");
+    if (l.prix) {
+      a.textContent = "Acheter";
+      a.href = lienPaypal(l, b);
+      a.target = "_blank";
+      a.rel = "noopener";
+      if (l.top) a.classList.add("btn-plein");
+    } else {
+      a.textContent = "Me contacter";
+      a.href = mailto(`Exclusive - ${b.nom.toUpperCase()}`);
+    }
+    return el;
+  }));
 }
 
 function carte(b) {
@@ -77,7 +124,7 @@ function filtrer() {
 $("recherche").addEventListener("input", filtrer);
 $("voir-plus").addEventListener("click", () => { affiches += PAR_PAGE; afficher(); });
 $("c-mail").href = mailto("Contact depuis le site");
-$("l-mail").href = mailto("Licence");
+if (location.hash === "#merci") $("merci").hidden = false;
 
 fetch("data/beats.json", { cache: "no-cache" })
   .then((r) => r.json())

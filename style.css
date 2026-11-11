@@ -85,11 +85,45 @@ nav a:hover { color: var(--accent); }
 .vide { color: var(--doux); text-align: center; padding: 30px 0; }
 .plus { text-align: center; margin-top: 18px; }
 
+.licences { margin: 36px 0; scroll-margin-top: 20px; }
+.licences h2 { font-size: 34px; }
+.pour { margin: 2px 0 0; }
+.pour strong { color: var(--accent); font-family: Anton, sans-serif; font-weight: 400; font-size: 20px; letter-spacing: .02em; }
+.aide { color: var(--doux); font-size: 13px; margin: 2px 0 0; }
+.aide a { color: var(--texte); }
+.offres { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 16px 0 14px; }
+.offre { display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--ligne); background: var(--panneau); }
+.offre.top { border-color: var(--accent); }
+.offre-nom { margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: 13px; color: var(--doux); }
+.offre.top .offre-nom { color: var(--accent); }
+.offre-prix { margin: 2px 0 10px; font-family: Anton, sans-serif; font-size: 34px; line-height: 1.1; }
+.offre ul { margin: 0 0 16px; padding: 0; list-style: none; font-size: 14px; flex: 1; }
+.offre li { padding: 3px 0; color: var(--texte); }
+.offre li::before { content: "+ "; color: var(--accent); font-weight: 700; }
+.offre .btn { width: 100%; }
+
 .bloc { margin: 36px 0; padding: 26px; border: 1px solid var(--ligne); background: var(--panneau); }
 .bloc h2 { font-size: 34px; }
 .bloc p { color: var(--doux); margin: 4px 0 18px; }
+.merci { border-color: var(--accent); margin-top: 6px; }
+.merci a { color: var(--accent); }
 
 footer { color: var(--doux); font-size: 13px; padding: 10px 0 40px; }
+
+/* page conditions des licences */
+.page { max-width: 900px; margin: 0 auto; padding: 22px clamp(16px, 4vw, 40px) 0; }
+.page h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1; margin: 40px 0 6px; }
+.page h2 { font-size: 28px; margin: 36px 0 10px; }
+.tableau { overflow-x: auto; margin-top: 24px; border: 1px solid var(--ligne); }
+.tableau table { width: 100%; border-collapse: collapse; min-width: 560px; font-size: 14px; }
+.tableau th, .tableau td { padding: 12px; border-bottom: 1px solid var(--ligne); text-align: left; vertical-align: top; }
+.tableau th { font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 13px; background: var(--panneau); }
+.tableau th span { font-family: Anton, sans-serif; font-size: 22px; color: var(--accent); letter-spacing: 0; font-weight: 400; }
+.tableau td:first-child { color: var(--doux); }
+.regles { padding-left: 18px; margin: 0; }
+.regles li { margin: 8px 0; color: var(--doux); }
+.regles strong { color: var(--texte); }
+.page .actions { margin-bottom: 30px; }
 
 @media (max-width: 900px) {
   .ecran { grid-template-columns: 1fr; }
@@ -98,4 +132,7 @@ footer { color: var(--doux); font-size: 13px; padding: 10px 0 40px; }
   .beat { grid-template-columns: 26px 80px 1fr; }
   .beat-meta { display: none; }
   .brand img { height: 28px; }
+}
+@media (max-width: 480px) {
+  .offres { grid-template-columns: 1fr; }
 }
